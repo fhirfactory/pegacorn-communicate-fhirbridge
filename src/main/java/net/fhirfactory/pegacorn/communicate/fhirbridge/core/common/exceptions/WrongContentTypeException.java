@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.iris.core.common.exceptions;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions;
 
 /**
  *

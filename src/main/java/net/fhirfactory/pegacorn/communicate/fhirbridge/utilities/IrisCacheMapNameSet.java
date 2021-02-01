@@ -21,12 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.iris.utilities;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.utilities;
+
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author Mark A. Hunter (ACT Health)
  */
+
+@ApplicationScoped
 public class IrisCacheMapNameSet {
     private static final String IRIS_MATRIX_ROOM_ID_2_ROOM_NAME_MAP = "Pegacorn.Communicate.Iris.MatrixRoomID2MatrixRoomNameMap";
     private static final String IRIS_MATRIX_ROOM_ID_2_FHIR_RESOURCE_REFERENCE_MAP = "Pegacorn.Communicate.Iris.MatrixRoomID2FHIRResourceReferenceMap";

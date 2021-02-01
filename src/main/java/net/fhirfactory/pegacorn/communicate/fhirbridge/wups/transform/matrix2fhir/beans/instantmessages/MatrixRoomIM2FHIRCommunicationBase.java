@@ -45,11 +45,11 @@ import java.util.List;
  *
  * @author ACT Health
  */
-@ApplicationScoped
-public class MatrixRoomIM2FHIRCommunicationSkeleton
+
+public abstract class MatrixRoomIM2FHIRCommunicationBase
 {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MatrixRoomIM2FHIRCommunicationSkeleton.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MatrixRoomIM2FHIRCommunicationBase.class);
 
     @Inject
     protected PegacornSystemReference pegacornSystemReference;
@@ -101,15 +101,15 @@ public class MatrixRoomIM2FHIRCommunicationSkeleton
         }
         Communication newCommunication = new Communication();
         newCommunication.setId(roomMessage.getString("event_id"));
-        LOG.trace(".buildDefaultCommunicationMessage(): Add narrative of Communication Entity");
-        Narrative communicationResourceNarrative = new Narrative();
-        communicationResourceNarrative.setStatus(Narrative.NarrativeStatus.GENERATED);
-        XhtmlNode elementDiv = new XhtmlNode();
-        elementDiv.addDocType("xmlns=\\\"http://www.w3.org/1999/xhtml\"");
-        elementDiv.addText("<p> A message generate on the Pegacorn::Communicate::RoomServer platform </p>");
-        LOG.trace("buildDefaultCommunicationMessage(): Adding Narrative, content added --> {}", elementDiv.getContent());
-        communicationResourceNarrative.setDiv(elementDiv);
-        newCommunication.setText(communicationResourceNarrative);
+//        LOG.trace(".buildDefaultCommunicationMessage(): Add narrative of Communication Entity");
+//        Narrative communicationResourceNarrative = new Narrative();
+//        communicationResourceNarrative.setStatus(Narrative.NarrativeStatus.GENERATED);
+//        XhtmlNode elementDiv = new XhtmlNode();
+//        elementDiv.addDocType("xmlns=\\\"http://www.w3.org/1999/xhtml\"");
+//        elementDiv.addText("<p> A message generate on the Pegacorn::Communicate::RoomServer platform </p>");
+//        LOG.trace("buildDefaultCommunicationMessage(): Adding Narrative, content added --> {}", elementDiv.getContent());
+//        communicationResourceNarrative.setDiv(elementDiv);
+//        newCommunication.setText(communicationResourceNarrative);
         LOG.trace("buildDefaultCommunicationMessage(): Set the FHIR::Communication.CommunicationStatus to COMPLETED (we don't chain, yet)");
         // TODO : Add chaining in Communication entities.
         newCommunication.setStatus(Communication.CommunicationStatus.COMPLETED);

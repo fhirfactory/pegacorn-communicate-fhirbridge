@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.instantmessaging.contentbuilders;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.instantmessages.contentbuilders;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -59,7 +59,7 @@ public class MatrixUserID2FHIRPractitionerReference {
      * List<FHIR::Reference>
      * and returned. If no Reference is found, then an empty set is returned.
      *
-     * @param pRoomServerMessage A Matrix(R) "m.room.message" message (see
+     * @param matrixUserID A Matrix(R) "m.room.message" message (see
      * https://matrix.org/docs/spec/client_server/r0.6.0#room-event-fields)
      * @return Reference The List<FHIR::Reference> for the Recipients (see
      * https://www.hl7.org/fhir/references.html#Reference)

@@ -25,10 +25,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.rooms.contentbuilders;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.rooms.contentbuilders;
 
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MinorTransformationException;
-import net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.common.MatrixAttribute2FHIRIdentifierBuilders;
+import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.common.MatrixAttribute2FHIRIdentifierBuilders;
 import net.fhirfactory.pegacorn.referencevalues.PegacornSystemReference;
 import org.hl7.fhir.r4.model.*;
 import org.json.JSONException;

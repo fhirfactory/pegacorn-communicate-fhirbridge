@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.fhirfactory.pegacorn.communicate.iris.utilities;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.utilities;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;

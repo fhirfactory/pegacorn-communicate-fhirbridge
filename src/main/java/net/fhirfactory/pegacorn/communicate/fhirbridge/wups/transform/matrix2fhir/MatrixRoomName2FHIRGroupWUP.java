@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,7 +30,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 import net.fhirfactory.pegacorn.common.model.FDN;
 import net.fhirfactory.pegacorn.common.model.RDN;
-import net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.rooms.contentbuilders.RoomInfoName2Group;
+import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.rooms.contentbuilders.RoomInfoName2Group;
 import net.fhirfactory.pegacorn.petasos.model.processingplant.DefaultWorkshopSetEnum;
 import net.fhirfactory.pegacorn.petasos.model.topics.TopicToken;
 import net.fhirfactory.pegacorn.petasos.model.topics.TopicTypeEnum;
@@ -67,7 +67,8 @@ public class MatrixRoomName2FHIRGroupWUP extends MOAStandardWUP {
         HashSet<TopicToken> myTopicsOfInterest = new HashSet<TopicToken>();
         myTopicsOfInterest.add(payloadTopicToken);
         LOG.debug("getSubscribedTopics(): Exit, myTopicsOfInterest --> {}", myTopicsOfInterest);
-        return(myTopicsOfInterest);    }
+        return(myTopicsOfInterest);
+    }
 
     @Override
     public String specifyWUPInstanceName() {

@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import net.fhirfactory.pegacorn.common.model.FDN;
 import net.fhirfactory.pegacorn.common.model.FDNToken;
 import net.fhirfactory.pegacorn.common.model.RDN;
+import net.fhirfactory.pegacorn.datasets.matrix.MatrixClientServiceAPIConstants;
 import net.fhirfactory.pegacorn.petasos.model.topics.TopicToken;
 import net.fhirfactory.pegacorn.petasos.model.topics.TopicTypeEnum;
 import net.fhirfactory.pegacorn.petasos.model.topology.NodeElementFunctionToken;
@@ -47,30 +48,23 @@ public class IncomingMatrixEventSet2UoW
     private static final Logger LOG = LoggerFactory.getLogger(IncomingMatrixEventSet2UoW.class);
 
     @Inject
-    IncomingMatrixMessageSplitter messageSplitter;
+    private MatrixClientServiceAPIConstants matrixClientServiceAPIConstants;
 
     public UoW encapsulateMatrixMessage(String matrixMessage, NodeElementFunctionToken wupFunctionToken, FDNToken wupInstanceID)
     {
         LOG.debug(".encapsulateMatrixMessage(): Entry, Matrix Message --> {}, wupFunctionToken -> {}, wupInstanceID --> {}", matrixMessage, wupFunctionToken, wupInstanceID);
         LOG.trace(".encapsulateMatrixMessage(): Creating new Payload element, first the Payload TopicToken");
         FDN payloadTopicFDN = new FDN();
-        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_SECTOR.getTopicType(), "InformationTechnology"));
-        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_CATEGORY.getTopicType(), "CollaborationServices"));
         payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_DEFINER.getTopicType(), "Matrix"));
-        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_TOPIC_GROUP.getTopicType(), "ClientServerAPI"));
-        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_TOPIC.getTopicType(), "General"));
-        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_SUB_TOPIC.getTopicType(), "RawEventSet"));
+        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_CATEGORY.getTopicType(), "ClientServiceAPI"));
+        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_SUBCATEGORY.getTopicType(), "General"));
+        payloadTopicFDN.appendRDN(new RDN(TopicTypeEnum.DATASET_RESOURCE.getTopicType(), "RawEventSet"));
         TopicToken payloadTopicToken = new TopicToken();
         payloadTopicToken.setIdentifier(payloadTopicFDN.getToken());
-        payloadTopicToken.setVersion("1.0.0"); // TODO This version should be set & extracted somewhere
+        payloadTopicToken.setVersion(matrixClientServiceAPIConstants.getMatrixClientServicesAPIRelease());
         LOG.trace(".encapsulateMatrixMessage(): Creating new Payload element, now the Payload itself");
-        UoWPayload contentPayload = new UoWPayload();
-        contentPayload.setPayloadTopicID(payloadTopicToken);
-        contentPayload.setPayload(matrixMessage);
-        UoW newUoW = new UoW(payloadTopicFDN.getToken(), contentPayload);
-        UoWPayloadSet payloadSet = new UoWPayloadSet();
-        payloadSet.addPayloadElement(contentPayload);
-        newUoW.setEgressContent(payloadSet);
+        UoWPayload contentPayload = new UoWPayload(payloadTopicToken,matrixMessage );
+        UoW newUoW = new UoW(contentPayload);
         LOG.debug("encapsulateMatrixMessage(): Exit, UoW created, newUoW --> {}", newUoW);
         return(newUoW);
     }

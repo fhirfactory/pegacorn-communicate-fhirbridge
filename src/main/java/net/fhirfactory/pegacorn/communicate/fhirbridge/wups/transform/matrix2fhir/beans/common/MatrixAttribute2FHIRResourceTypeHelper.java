@@ -19,16 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.common;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.enterprise.context.ApplicationScoped;
 
 /**
  *
  * @author Mark A. Hunter (ACT Health)
  * @since 2020-05-05
  */
+@ApplicationScoped
 public class MatrixAttribute2FHIRResourceTypeHelper
 {
 

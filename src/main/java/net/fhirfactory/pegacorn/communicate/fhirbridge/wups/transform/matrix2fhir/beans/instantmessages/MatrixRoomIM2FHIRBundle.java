@@ -5,11 +5,19 @@ import ca.uhn.fhir.parser.IParser;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MajorTransformationException;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MatrixMessageException;
 import net.fhirfactory.pegacorn.datasets.fhir.r4.base.entities.bundle.MessageHeaderHelper;
+import net.fhirfactory.pegacorn.datasets.fhir.r4.internal.topics.FHIRElementTopicIDBuilder;
 import net.fhirfactory.pegacorn.deployment.names.PegacornCommunicateComponentNames;
 import net.fhirfactory.pegacorn.deployment.names.PegacornLadonComponentNames;
+import net.fhirfactory.pegacorn.deployment.properties.SystemWideProperties;
+import net.fhirfactory.pegacorn.petasos.model.topics.TopicToken;
+import net.fhirfactory.pegacorn.petasos.model.uow.UoW;
+import net.fhirfactory.pegacorn.petasos.model.uow.UoWPayload;
+import net.fhirfactory.pegacorn.petasos.model.uow.UoWProcessingOutcomeEnum;
+import net.fhirfactory.pegacorn.util.FHIRContextUtility;
 import org.hl7.fhir.r4.model.Bundle;
 import org.hl7.fhir.r4.model.Communication;
 import org.hl7.fhir.r4.model.MessageHeader;
+import org.hl7.fhir.r4.model.ResourceType;
 import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +44,15 @@ public class MatrixRoomIM2FHIRBundle {
     @Inject
     private PegacornLadonComponentNames pegacornLadonComponentNames;
 
+    @Inject
+    private FHIRContextUtility fhirContextUtility;
+
+    @Inject
+    private FHIRElementTopicIDBuilder fhirElementTopicIDBuilder;
+
+    @Inject
+    private SystemWideProperties systemWideProperties;
+
     /**
      *
      * This function takes an incoming Matrix Room Instant Message
@@ -60,7 +77,7 @@ public class MatrixRoomIM2FHIRBundle {
      * FHIR::Identifier for these may be queried from the
      * PractitionerID2MatrixName map.
      *
-     * @param roomInstantMessage The incoming Matrix Room Instant Message
+     * @param unitOfWork The incoming Matrix Room Instant Message
      * @return A List of FHIR::Bundle element, each comprising -->
      * FHIR::MessageHeader, FHIR::Communication
      * @throws MatrixMessageException
@@ -72,27 +89,46 @@ public class MatrixRoomIM2FHIRBundle {
      * <a href="https://www.hl7.org/fhir/bundle.html">FHIR Specification, Release 4.0.1, "Bundle" Resource</a>
      *
      */
-    public List<Bundle> convertMatrixInstantMessage2FHIRElements(String roomInstantMessage)
-            throws MatrixMessageException, JSONException, MajorTransformationException
-    {
-        LOG.debug("convertMatrixInstantMessage2FHIRElements(): Entry, Matrix Room Instant Message --> {}", roomInstantMessage);
-        if (roomInstantMessage == null) {
-            throw (new MatrixMessageException("Matrix Room Instant Message --> is null"));
+    public UoW convertMatrixRoomIM2FHIRBundle(UoW unitOfWork){
+        LOG.debug("convertMatrixRoomIM2FHIRBundle(): Entry, incoming UoW --> {}", unitOfWork);
+        if (unitOfWork == null) {
+            UoWPayload emptyPayload = new UoWPayload();
+            UoW uowInstance = new UoW(emptyPayload);
+            uowInstance.setProcessingOutcome(UoWProcessingOutcomeEnum.UOW_OUTCOME_FAILED);
+            uowInstance.setFailureDescription("Empty UoW Provided");
+            return(uowInstance);
         }
-        if (roomInstantMessage.isEmpty()) {
-            throw (new MatrixMessageException("Matrix Room Instant Message --> is empty"));
+        String imInstance = unitOfWork.getIngresContent().getPayload();
+        Communication generatedCommunication = null;
+        try{
+            generatedCommunication = im2FHIRCommunication.buildCommunicationResourceFromMatrixIMMessage(imInstance);
+        } catch(Exception ex){
+            unitOfWork.setProcessingOutcome(UoWProcessingOutcomeEnum.UOW_OUTCOME_FAILED);
+            unitOfWork.setFailureDescription(ex.getMessage());
+            return(unitOfWork);
         }
         // We need some helper functions to encode/decode the FHIR based message structures
-        LOG.trace("wrapCommunicationBundle(): Initialising FHIR Resource Parser & Setting Pretty Print");
-        FhirContext fhirContextHandle = FhirContext.forR4();
-        IParser fhirResourceParser = fhirContextHandle.newJsonParser();
-        // Now set up Iterator on the Ingres Content
-        Communication newCommunication = im2FHIRCommunication.buildCommunicationResourceFromMatrixIMMessage(roomInstantMessage);
-        MessageHeader newMessageHeader = messageHeaderHelper.buildMessageHeader(pegacornCommunicateComponentNames.getPegacornCommunicateFHIRBridgeSubsystem(), pegacornLadonComponentNames.getLadonSubsystemDefault());
-        Bundle newCommunicationBundle = buildCommunicationBundle(newMessageHeader, newCommunication);
-        ArrayList<Bundle> newOutputSet = new ArrayList<>();
-        newOutputSet.add(newCommunicationBundle);
-        return (newOutputSet);
+        LOG.trace("convertMatrixRoomIM2FHIRBundle(): Initialising FHIR Resource Parser & Setting Pretty Print");
+        IParser fhirResourceParser = fhirContextUtility.getJsonParser();
+        LOG.trace("convertMatrixRoomIM2FHIRBundle(): Generating MessageHeader for Bundle");
+        MessageHeader newMessageHeader = messageHeaderHelper.buildMessageHeader(pegacornCommunicateComponentNames.getFHIRBridgeSubsystem(), pegacornLadonComponentNames.getLadonSubsystemDefault());
+        LOG.trace("convertMatrixRoomIM2FHIRBundle(): Constructing Bundle");
+        Bundle newCommunicationBundle = null;
+        try{
+            newCommunicationBundle = buildCommunicationBundle(newMessageHeader, generatedCommunication);
+        } catch(Exception ex){
+            unitOfWork.setProcessingOutcome(UoWProcessingOutcomeEnum.UOW_OUTCOME_FAILED);
+            unitOfWork.setFailureDescription(ex.getMessage());
+            return(unitOfWork);
+        }
+        LOG.trace("convertMatrixRoomIM2FHIRBundle(): Converting Bundle to String");
+        String outputString = fhirResourceParser.encodeResourceToString(newCommunicationBundle);
+        TopicToken bundleToken = fhirElementTopicIDBuilder.createTopicToken(ResourceType.Bundle.name(), systemWideProperties.getPegacornDefaultFHIRVersion());
+        UoWPayload outputPayload = new UoWPayload(bundleToken,outputString);
+        unitOfWork.getEgressContent().addPayloadElement(outputPayload);
+        unitOfWork.setProcessingOutcome(UoWProcessingOutcomeEnum.UOW_OUTCOME_SUCCESS);
+        LOG.debug(".convertMatrixRoomIM2FHIRBundle(): Exit, Resource --> {}", outputString);
+        return (unitOfWork);
     }
 
     /**

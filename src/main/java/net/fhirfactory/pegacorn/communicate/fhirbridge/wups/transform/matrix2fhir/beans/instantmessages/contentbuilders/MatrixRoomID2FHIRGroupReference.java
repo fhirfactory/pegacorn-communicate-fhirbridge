@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.instantmessaging.contentbuilders;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.instantmessages.contentbuilders;
 
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MinorTransformationException;
 import net.fhirfactory.pegacorn.referencevalues.PegacornSystemReference;

@@ -20,48 +20,45 @@
  * SOFTWARE.
  */
 
-package net.fhirfactory.pegacorn.communicate.iris.wups.interact.ingres;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres;
+
+import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans.IncomingMatrixEventSet2UoW;
+import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans.IncomingMatrixEventSetValidator;
+import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans.IncomingMatrixMessageSplitter;
+import net.fhirfactory.pegacorn.deployment.names.PegacornCommunicateComponentNames;
+import net.fhirfactory.pegacorn.petasos.model.processingplant.DefaultWorkshopSetEnum;
+import net.fhirfactory.pegacorn.petasos.wup.archetypes.InteractIngresMessagingGatewayWUP;
+import net.fhirfactory.pegacorn.petasos.wup.helper.IngresActivityBeginRegistration;
+import org.apache.camel.ExchangePattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import net.fhirfactory.pegacorn.communicate.iris.wups.interact.IncomingMatrixEventSetValidator;
-import net.fhirfactory.pegacorn.communicate.iris.wups.interact.IncomingMatrixEventSet2UoW;
-import net.fhirfactory.pegacorn.petasos.wup.archetypes.InteractIngresMessagingGatewayWUP;
-import net.fhirfactory.pegacorn.petasos.wup.helper.IngresActivityBeginRegistration;
-import org.apache.camel.LoggingLevel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @ApplicationScoped
 public class MatrixApplicationServicesEventsReceiverWUP extends InteractIngresMessagingGatewayWUP {
     private static final Logger LOG = LoggerFactory.getLogger(MatrixApplicationServicesEventsReceiverWUP.class);
 
-    private static String INGRES_GATEWAY_COMPONENT = "netty-http";
-    
-    public MatrixApplicationServicesEventsReceiverWUP(){
-        super();
-    }
+    @Inject
+    private PegacornCommunicateComponentNames pegacornCommunicateComponentNames;
    
     @Override
     public void configure() throws Exception {
+        LOG.info("MatrixApplicationServicesEventsReceiverWUP:: ingresFeed() --> {}", this.ingresFeed());
+        LOG.info("MatrixApplicationServicesEventsReceiverWUP:: egressFeed() --> {}", this.egressFeed());
 
-        LOG.debug(".configure(): Matrix Instant Message Room Notification Handler (RoomServer --> Iris) Endpoint = " + this.ingresFeed());
-        
-        LOG.info(".configure(): getWupIngresPoint --> {}", this.getWupIngresPoint());
-
-        from(this.getWupIngresPoint())
-                .routeId("MatrixEvents2FHIR-RoomServer2Iris-Route -->")
+        from(this.ingresFeed())
+                .routeId(getNameSet().getRouteCoreWUP())
                 .transform(simple("${bodyAs(String)}"))
-                .log(LoggingLevel.TRACE, "Message received!!!")
                 .bean(IncomingMatrixEventSetValidator.class, "validateEventSetMessage")
-                .bean(IncomingMatrixEventSet2UoW.class, "encapsulateMatrixMessage(*, " + this.getWUPFunctionToken() + "," + this.getWupInstanceID() + ")")
-                .bean(IngresActivityBeginRegistration.class, "registerActivityStart(*,  Exchange," + this.getWUPFunctionToken() + "," + this.getWupInstanceID() + ")")
-                .log(LoggingLevel.TRACE, "Message Validated, Forwarding!!!")
-                .to(this.egressFeed())
+                .bean(IncomingMatrixEventSet2UoW.class, "encapsulateMatrixMessage")
+                .bean(IngresActivityBeginRegistration.class, "registerActivityStart(*,  Exchange," + getWupTopologyNodeElement().extractNodeKey() + ")")
+                .bean(IncomingMatrixMessageSplitter.class, "splitMessageIntoEvents")
+                .to(ExchangePattern.InOnly, this.egressFeed())
+                .transform().simple("{}")
                 .end();
     }
-
-
 
     @Override
     public String specifyWUPInstanceName() {
@@ -70,26 +67,46 @@ public class MatrixApplicationServicesEventsReceiverWUP extends InteractIngresMe
 
     @Override
     public String specifyWUPVersion() {
-        return("0.0.1");
-    }
-    
-    @Override
-    protected String getEndpointComponentDefinition() {
-        return("netty-http");
+        return("1.0.0");
     }
 
     @Override
-    protected String getEndpointProtocol() {
-        return("http");
+    protected Logger getLogger() {
+        return (LOG);
     }
 
     @Override
-    protected String getEndpointProtocolLeadIn() {
-        return("://");
+    protected String specifyWUPWorkshop() {
+        return (DefaultWorkshopSetEnum.INTERACT_WORKSHOP.getWorkshop());
     }
 
     @Override
-    protected String getEndpointProtocolLeadout() {
-        return("/");
+    protected String specifyIngresTopologyEndpointName() {
+        return (pegacornCommunicateComponentNames.getEndpointFHIRBridgeMatrixAppServicesAPIPort());
+    }
+
+    @Override
+    protected String specifyIngresEndpointVersion() {
+        return (pegacornCommunicateComponentNames.getFHIRBridgeProcessingPlantVersion());
+    }
+
+    @Override
+    protected String specifyEndpointComponentDefinition() {
+        return ("netty-http");
+    }
+
+    @Override
+    protected String specifyEndpointProtocol() {
+        return ("http");
+    }
+
+    @Override
+    protected String specifyEndpointProtocolLeadIn() {
+        return ("://");
+    }
+
+    @Override
+    protected String specifyEndpointProtocolLeadout() {
+        return "/transactions/{id}";
     }
 }

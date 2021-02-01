@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.fhirfactory.pegacorn.communicate.iris.utilities;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.utilities;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans;
 
 /**
  *

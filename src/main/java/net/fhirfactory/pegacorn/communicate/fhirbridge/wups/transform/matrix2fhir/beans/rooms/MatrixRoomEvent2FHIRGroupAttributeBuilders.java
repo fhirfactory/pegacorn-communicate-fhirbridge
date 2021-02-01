@@ -19,9 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.rooms;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.rooms;
 
-import net.fhirfactory.pegacorn.communicate.fhirbridge.core.matrxi2fhir.common.MatrixAttribute2FHIRIdentifierBuilders;
+import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.common.MatrixAttribute2FHIRIdentifierBuilders;
 import net.fhirfactory.pegacorn.referencevalues.PegacornSystemReference;
 import org.hl7.fhir.r4.model.*;
 import org.json.JSONObject;

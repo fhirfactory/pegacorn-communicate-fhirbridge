@@ -25,7 +25,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.fhirfactory.pegacorn.communicate.iris.core.common.exceptions;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions;
 
 /**
  *

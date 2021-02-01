@@ -19,18 +19,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.iris.core.common;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.core.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import org.hl7.fhir.r4.model.Identifier;
 
+import javax.enterprise.context.ApplicationScoped;
+
 /**
  *
  * @author Mark A. Hunter (ACT Health) 
  * @since 2020-01-20
  */
+@ApplicationScoped
 public class FHIRIdentifier2StringUtility {
 
     public String fromIdentifier2String(Identifier theIdentifier) {

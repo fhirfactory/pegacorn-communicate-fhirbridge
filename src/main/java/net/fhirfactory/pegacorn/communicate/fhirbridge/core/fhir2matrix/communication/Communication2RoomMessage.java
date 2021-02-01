@@ -19,21 +19,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package net.fhirfactory.pegacorn.communicate.iris.core.fhir2matrix.communication;
+package net.fhirfactory.pegacorn.communicate.fhirbridge.core.fhir2matrix.communication;
 
-import net.fhirfactory.pegacorn.communicate.iris.core.matrxi2fhir.common.MatrixAttribute2FHIRIdentifierBuilders;
-import net.fhirfactory.pegacorn.communicate.iris.core.common.keyidentifiermaps.MatrixUserID2PractitionerIDMap;
-import net.fhirfactory.pegacorn.communicate.iris.core.common.keyidentifiermaps.MatrixRoomID2ResourceReferenceMap;
+import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.common.MatrixAttribute2FHIRIdentifierBuilders;
 
 import java.util.ArrayList;
 
 import java.util.List;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.hl7.fhir.r4.model.Communication;
 
 import ca.uhn.fhir.context.FhirContext;
-import net.fhirfactory.pegacorn.communicate.iris.core.common.exceptions.MinorTransformationException;
+import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MinorTransformationException;
 import net.fhirfactory.pegacorn.referencevalues.PegacornSystemReference;
 
 import org.json.JSONObject;
@@ -85,6 +84,7 @@ import org.slf4j.LoggerFactory;
  * @since 2020-01-20
  *
  */
+@ApplicationScoped
 public class Communication2RoomMessage {
 
     private static final Logger LOG = LoggerFactory.getLogger(Communication2RoomMessage.class);
@@ -97,11 +97,6 @@ public class Communication2RoomMessage {
     @Inject
     MatrixAttribute2FHIRIdentifierBuilders identifierBuilders;
     MatrixAttribute2FHIRIdentifierBuilders getIdentifierBuilders(){return (identifierBuilders);}
-    
-    @Inject
-    protected MatrixRoomID2ResourceReferenceMap theRoom2ReferenceIDMap;
-    @Inject
-    protected MatrixUserID2PractitionerIDMap theUserID2PractitionerIDMap;
 
     /**
      * The method is the primary (exposed) method for performing the entity
