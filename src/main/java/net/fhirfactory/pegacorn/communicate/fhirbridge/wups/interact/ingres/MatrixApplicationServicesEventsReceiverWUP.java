@@ -25,7 +25,7 @@ package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans.IncomingMatrixEventSet2UoW;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans.IncomingMatrixEventSetValidator;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.interact.ingres.beans.IncomingMatrixMessageSplitter;
-import net.fhirfactory.pegacorn.deployment.names.PegacornCommunicateComponentNames;
+import net.fhirfactory.pegacorn.deployment.properties.communicate.CommunicateNames;
 import net.fhirfactory.pegacorn.petasos.model.processingplant.DefaultWorkshopSetEnum;
 import net.fhirfactory.pegacorn.petasos.wup.archetypes.InteractIngresMessagingGatewayWUP;
 import net.fhirfactory.pegacorn.petasos.wup.helper.IngresActivityBeginRegistration;
@@ -41,7 +41,7 @@ public class MatrixApplicationServicesEventsReceiverWUP extends InteractIngresMe
     private static final Logger LOG = LoggerFactory.getLogger(MatrixApplicationServicesEventsReceiverWUP.class);
 
     @Inject
-    private PegacornCommunicateComponentNames pegacornCommunicateComponentNames;
+    private CommunicateNames pegacornCommunicateNames;
    
     @Override
     public void configure() throws Exception {
@@ -82,12 +82,12 @@ public class MatrixApplicationServicesEventsReceiverWUP extends InteractIngresMe
 
     @Override
     protected String specifyIngresTopologyEndpointName() {
-        return (pegacornCommunicateComponentNames.getEndpointFHIRBridgeMatrixAppServicesAPIPort());
+        return (pegacornCommunicateNames.getEndpointFHIRBridgeMatrixAppServicesAPIPort());
     }
 
     @Override
     protected String specifyIngresEndpointVersion() {
-        return (pegacornCommunicateComponentNames.getFHIRBridgeProcessingPlantVersion());
+        return (pegacornCommunicateNames.getFHIRBridgeProcessingPlantVersion());
     }
 
     @Override

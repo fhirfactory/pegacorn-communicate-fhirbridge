@@ -1,0 +1,56 @@
+<!--
+The MIT License
+
+Copyright 2020 ACT Health.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<config xmlns="urn:org:jgroups"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:org:jgroups http://www.jgroups.org/schema/jgroups-4.0.xsd">
+    <UDP
+        bind_addr="${jgroups.bind_addr:127.0.0.1}"
+        mcast_addr="${jgroups.udp.mcast_addr:228.6.7.8}"
+        mcast_port="${jgroups.udp.mcast_port:46655}"
+        tos="8"
+        ucast_recv_buf_size="128000"
+        ucast_send_buf_size="128000"
+        mcast_recv_buf_size="128000"
+        mcast_send_buf_size="128000"
+        max_bundle_size="64000"
+        ip_ttl="${jgroups.udp.ip_ttl:2}"
+        enable_diagnostics="false"
+        thread_naming_pattern="pl"
+        thread_pool.enabled="true"
+        thread_pool.min_threads="2"
+        thread_pool.max_threads="30"
+        thread_pool.keep_alive_time="5000"/>
+    <PING/>
+    <MERGE3 max_interval="30000" min_interval="10000"/>
+    <FD_SOCK/>
+    <FD_ALL/>
+    <BARRIER/>
+    <pbcast.NAKACK2 use_mcast_xmit="true" discard_delivered_msgs="true"/>
+    <UNICAST3/>
+    <pbcast.STABLE stability_delay="1000" desired_avg_gossip="50000" max_bytes="1000000"/>
+    <pbcast.GMS print_local_addr="false" join_timeout="3000" view_bundling="true"/>
+    <UFC max_credits="500000" min_threshold="0.20"/>
+    <MFC max_credits="500000" min_threshold="0.20"/>
+    <FRAG2 frag_size="60000"/>
+</config>

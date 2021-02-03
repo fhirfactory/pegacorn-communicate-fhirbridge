@@ -1,14 +1,13 @@
 package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.instantmessages;
 
-import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MajorTransformationException;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MatrixMessageException;
 import net.fhirfactory.pegacorn.datasets.fhir.r4.base.entities.bundle.MessageHeaderHelper;
 import net.fhirfactory.pegacorn.datasets.fhir.r4.internal.topics.FHIRElementTopicIDBuilder;
-import net.fhirfactory.pegacorn.deployment.names.PegacornCommunicateComponentNames;
-import net.fhirfactory.pegacorn.deployment.names.PegacornLadonComponentNames;
-import net.fhirfactory.pegacorn.deployment.properties.SystemWideProperties;
+import net.fhirfactory.pegacorn.deployment.properties.communicate.CommunicateNames;
+import net.fhirfactory.pegacorn.deployment.properties.ladon.LadonComponentNames;
+import net.fhirfactory.pegacorn.datasets.PegacornReferenceProperties;
 import net.fhirfactory.pegacorn.petasos.model.topics.TopicToken;
 import net.fhirfactory.pegacorn.petasos.model.uow.UoW;
 import net.fhirfactory.pegacorn.petasos.model.uow.UoWPayload;
@@ -24,9 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @ApplicationScoped
 public class MatrixRoomIM2FHIRBundle {
@@ -39,10 +36,10 @@ public class MatrixRoomIM2FHIRBundle {
     private MessageHeaderHelper messageHeaderHelper;
 
     @Inject
-    private PegacornCommunicateComponentNames pegacornCommunicateComponentNames;
+    private CommunicateNames pegacornCommunicateNames;
 
     @Inject
-    private PegacornLadonComponentNames pegacornLadonComponentNames;
+    private LadonComponentNames ladonComponentNames;
 
     @Inject
     private FHIRContextUtility fhirContextUtility;
@@ -51,7 +48,7 @@ public class MatrixRoomIM2FHIRBundle {
     private FHIRElementTopicIDBuilder fhirElementTopicIDBuilder;
 
     @Inject
-    private SystemWideProperties systemWideProperties;
+    private PegacornReferenceProperties systemWideProperties;
 
     /**
      *
@@ -111,7 +108,7 @@ public class MatrixRoomIM2FHIRBundle {
         LOG.trace("convertMatrixRoomIM2FHIRBundle(): Initialising FHIR Resource Parser & Setting Pretty Print");
         IParser fhirResourceParser = fhirContextUtility.getJsonParser();
         LOG.trace("convertMatrixRoomIM2FHIRBundle(): Generating MessageHeader for Bundle");
-        MessageHeader newMessageHeader = messageHeaderHelper.buildMessageHeader(pegacornCommunicateComponentNames.getFHIRBridgeSubsystem(), pegacornLadonComponentNames.getLadonSubsystemDefault());
+        MessageHeader newMessageHeader = messageHeaderHelper.buildMessageHeader(pegacornCommunicateNames.getFHIRBridgeSubsystem(), ladonComponentNames.getLadonSubsystemDefault());
         LOG.trace("convertMatrixRoomIM2FHIRBundle(): Constructing Bundle");
         Bundle newCommunicationBundle = null;
         try{

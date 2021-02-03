@@ -21,7 +21,6 @@
  */
 package net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.instantmessages;
 
-import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.parser.IParser;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MajorTransformationException;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.core.common.exceptions.MatrixMessageException;
@@ -32,7 +31,7 @@ import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhi
 import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.instantmessages.contentbuilders.MatrixRoomIMMediaContent2FHIRMediaReferenceSet;
 import net.fhirfactory.pegacorn.communicate.fhirbridge.wups.transform.matrix2fhir.beans.instantmessages.contentbuilders.MatrixRoomIMTextMessageContent2FHIRCommunicationPayload;
 import net.fhirfactory.pegacorn.datasets.fhir.r4.internal.topics.FHIRElementTopicIDBuilder;
-import net.fhirfactory.pegacorn.deployment.properties.SystemWideProperties;
+import net.fhirfactory.pegacorn.datasets.PegacornReferenceProperties;
 import net.fhirfactory.pegacorn.petasos.model.topics.TopicToken;
 import net.fhirfactory.pegacorn.petasos.model.uow.UoW;
 import net.fhirfactory.pegacorn.petasos.model.uow.UoWPayload;
@@ -40,10 +39,7 @@ import net.fhirfactory.pegacorn.petasos.model.uow.UoWProcessingOutcomeEnum;
 import net.fhirfactory.pegacorn.referencevalues.PegacornSystemReference;
 import net.fhirfactory.pegacorn.util.FHIRContextUtility;
 import org.hl7.fhir.r4.model.*;
-import org.hl7.fhir.r4.model.Bundle.BundleEntryComponent;
-import org.hl7.fhir.r4.model.Bundle.BundleEntryRequestComponent;
 import org.hl7.fhir.r4.model.Communication.CommunicationPayloadComponent;
-import org.hl7.fhir.r4.model.MessageHeader.MessageSourceComponent;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -54,7 +50,6 @@ import javax.inject.Inject;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <h1>Transform Room Based Message to a FHIR::Communication Resource</h1>
@@ -128,7 +123,7 @@ public class MatrixRoomIM2FHIRCommunication extends MatrixRoomIM2FHIRCommunicati
     private FHIRContextUtility fhirContextUtility;
 
     @Inject
-    private SystemWideProperties systemWideProperties;
+    private PegacornReferenceProperties systemWideProperties;
 
     /**
      * The method is the primary method for performing the entity
