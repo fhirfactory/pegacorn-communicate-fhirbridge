@@ -1,0 +1,248 @@
+{
+  "topicSectors" : [ {
+    "topicType" : "DATASET_SECTOR",
+    "topicName" : "InformationTechnology",
+    "version" : null,
+    "containedElements" : [ {
+      "topicType" : "DATASET_CATEGORY",
+      "topicName" : "CollaborationServices",
+      "version" : null,
+      "containedElements" : [ {
+        "topicType" : "DATASET_DEFINER",
+        "topicName" : "Matrix",
+        "version" : "0.6.1",
+        "containedElements" : [ {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "ClientServerAPI",
+          "version" : null,
+          "containedElements" : [ {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "General",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "General",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          }, {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "InstantMessaging",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "m.room.message",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "m.room.message.feedback",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "m.room.name",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "m.room.topic",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "m.room.avatar",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "m.room.pinned_events",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          }, {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "RoomEvents",
+            "version" : null,
+            "containedElements" : [ ]
+          }, {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "UserNotifications",
+            "version" : null,
+            "containedElements" : [ ]
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "topicType" : "DATASET_SECTOR",
+    "topicName" : "Health",
+    "version" : null,
+    "containedElements" : [ {
+      "topicType" : "DATASET_CATEGORY",
+      "topicName" : "General",
+      "version" : null,
+      "containedElements" : [ {
+        "topicType" : "DATASET_DEFINER",
+        "topicName" : "HL7-FHIR",
+        "version" : "4.0.1",
+        "containedElements" : [ {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "Individuals",
+          "version" : null,
+          "containedElements" : [ {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "Patient",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Unnormalised",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Unnormalised",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          }, {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "Practitioner",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Unnormalised",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Enriched",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          }, {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "Group",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Unnormalised",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Enriched",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          }, {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "PractitionerRole",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Unnormalised",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Enriched",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          } ]
+        }, {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "Workflow",
+          "version" : null,
+          "containedElements" : [ ]
+        }, {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "Entities",
+          "version" : null,
+          "containedElements" : [ ]
+        }, {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "RequestAndResponse",
+          "version" : null,
+          "containedElements" : [ {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "Communication",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Unnormalised",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Enriched",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          } ]
+        }, {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "Management",
+          "version" : null,
+          "containedElements" : [ ]
+        }, {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "Summary",
+          "version" : null,
+          "containedElements" : [ ]
+        }, {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "CareProvision",
+          "version" : null,
+          "containedElements" : [ {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "CarePlan",
+            "version" : null,
+            "containedElements" : [ {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Unnormalised",
+              "version" : null,
+              "containedElements" : [ ]
+            }, {
+              "topicType" : "DATASET_SUB_TOPIC",
+              "topicName" : "Enriched",
+              "version" : null,
+              "containedElements" : [ ]
+            } ]
+          } ]
+        } ]
+      } ]
+    } ]
+  }, {
+    "topicType" : "DATASET_SECTOR",
+    "topicName" : "Financials",
+    "version" : null,
+    "containedElements" : [ {
+      "topicType" : "DATASET_CATEGORY",
+      "topicName" : "SupplyChainSupport",
+      "version" : null,
+      "containedElements" : [ {
+        "topicType" : "DATASET_DEFINER",
+        "topicName" : "TechnologyOne",
+        "version" : "1.0.0",
+        "containedElements" : [ {
+          "topicType" : "DATASET_TOPIC_GROUP",
+          "topicName" : "Transactions",
+          "version" : null,
+          "containedElements" : [ {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "AccountsPayable",
+            "version" : null,
+            "containedElements" : [ ]
+          }, {
+            "topicType" : "DATASET_TOPIC",
+            "topicName" : "AccountsReceivable",
+            "version" : null,
+            "containedElements" : [ ]
+          } ]
+        } ]
+      } ]
+    } ]
+  } ]
+}
