@@ -29,3 +29,4 @@ target/maven-archiver/
 target/test-classes/
 
 target/maven-status/maven-compiler-plugin/compile/default-compile/
+/target/
