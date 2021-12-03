@@ -21,7 +21,7 @@
  */
 package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform.resources.group.transformers;
 
-import net.fhirfactory.pegacorn.common.model.dates.EffectivePeriod;
+import net.fhirfactory.pegacorn.core.model.dates.EffectivePeriod;
 import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.PegacornIdentifierCodeEnum;
 import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.PegacornIdentifierCodeSystemFactory;
 import net.fhirfactory.pegacorn.internals.fhir.r4.resources.identifier.PegacornIdentifierFactory;
