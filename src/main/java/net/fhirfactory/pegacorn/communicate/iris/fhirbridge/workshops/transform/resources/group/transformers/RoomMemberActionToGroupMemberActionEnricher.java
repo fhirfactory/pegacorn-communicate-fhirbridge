@@ -21,8 +21,8 @@
  */
 package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform.resources.group.transformers;
 
-import net.fhirfactory.pegacorn.communicate.matrix.model.r061.events.common.contenttypes.MEventContentType;
-import net.fhirfactory.pegacorn.communicate.matrix.model.r061.events.room.MRoomMemberEvent;
+import net.fhirfactory.pegacorn.communicate.matrix.model.r110.events.common.contenttypes.MEventContentType;
+import net.fhirfactory.pegacorn.communicate.matrix.model.r110.events.room.MRoomMemberEvent;
 import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.valuesets.GroupMemberActionExtensionEnum;
 import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.extensions.GroupMemberActionExtensionEnricher;
 import org.hl7.fhir.r4.model.*;
