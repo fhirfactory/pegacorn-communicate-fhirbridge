@@ -23,8 +23,8 @@ package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform
 
 import net.fhirfactory.pegacorn.communicate.matrix.model.r110.events.common.contenttypes.MEventContentType;
 import net.fhirfactory.pegacorn.communicate.matrix.model.r110.events.room.MRoomMemberEvent;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.valuesets.GroupMemberActionExtensionEnum;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.extensions.GroupMemberActionExtensionEnricher;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.valuesets.GroupMemberActionExtensionEnum;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.extensions.GroupMemberActionExtensionEnricher;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

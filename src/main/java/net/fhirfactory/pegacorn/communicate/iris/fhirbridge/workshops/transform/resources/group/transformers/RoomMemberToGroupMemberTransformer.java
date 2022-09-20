@@ -24,8 +24,8 @@
 package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform.resources.group.transformers;
 
 import net.fhirfactory.pegacorn.internals.communicate.entities.rooms.datatypes.CommunicateRoomMember;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.extensions.GroupMemberTypeExtensionEnricher;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.practitioner.factories.PractitionerResourceHelpers;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.extensions.GroupMemberTypeExtensionEnricher;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.practitioner.factories.PractitionerResourceHelpers;
 import org.hl7.fhir.r4.model.Group;
 import org.hl7.fhir.r4.model.Period;
 import org.hl7.fhir.r4.model.Reference;

@@ -22,7 +22,7 @@
 package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform.resources.group.transformers;
 
 import net.fhirfactory.pegacorn.internals.communicate.entities.rooms.valuesets.CommunicateRoomTypeEnum;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.valuesets.GroupCodeValueSet;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.valuesets.GroupCodeValueSet;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Group;

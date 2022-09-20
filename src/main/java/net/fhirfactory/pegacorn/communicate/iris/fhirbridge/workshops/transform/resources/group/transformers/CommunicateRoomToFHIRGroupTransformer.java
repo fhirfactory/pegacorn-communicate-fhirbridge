@@ -26,10 +26,10 @@ package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform
 import net.fhirfactory.pegacorn.internals.communicate.entities.rooms.CommunicateRoom;
 import net.fhirfactory.pegacorn.internals.communicate.entities.rooms.datatypes.CommunicateRoomMember;
 import net.fhirfactory.pegacorn.internals.communicate.entities.rooms.valuesets.CommunicateRoomTypeEnum;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.factories.GroupCodeFactory;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.factories.GroupFactory;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.factories.GroupIdentifierFactory;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.group.valuesets.GroupCodeValueSet;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.factories.GroupCodeFactory;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.factories.GroupFactory;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.factories.GroupIdentifierFactory;
+import net.fhirfactory.dricats.internals.fhir.r4.resources.group.valuesets.GroupCodeValueSet;
 import org.hl7.fhir.r4.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
