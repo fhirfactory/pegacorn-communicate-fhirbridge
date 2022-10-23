@@ -24,7 +24,7 @@ package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform
 import net.fhirfactory.pegacorn.core.model.dates.EffectivePeriod;
 import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.PegacornIdentifierCodeEnum;
 import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.PegacornIdentifierCodeSystemFactory;
-import net.fhirfactory.pegacorn.internals.fhir.r4.resources.identifier.PegacornIdentifierFactory;
+import net.fhirfactory.pegacorn.internals.fhir.r4.resources.identifier.DRICaTSIdentifierFactory;
 import net.fhirfactory.pegacorn.referencevalues.PegacornSystemReference;
 import org.hl7.fhir.r4.model.Identifier;
 import org.hl7.fhir.r4.model.Period;
@@ -48,7 +48,7 @@ public class CommunicateRoomIDToFHIRGroupIdentifierTransformer {
     private PegacornIdentifierCodeSystemFactory pegacornIdentifierCodeSystemFactory;
 
     @Inject
-    private PegacornIdentifierFactory pegacornIdentifierFactory;
+    private DRICaTSIdentifierFactory pegacornIdentifierFactory;
 
     @Inject
     PegacornSystemReference pegacornSystemReference;
