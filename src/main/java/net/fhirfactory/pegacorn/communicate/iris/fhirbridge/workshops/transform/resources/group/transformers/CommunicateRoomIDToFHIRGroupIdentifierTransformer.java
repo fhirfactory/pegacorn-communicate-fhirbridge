@@ -22,8 +22,8 @@
 package net.fhirfactory.pegacorn.communicate.iris.fhirbridge.workshops.transform.resources.group.transformers;
 
 import net.fhirfactory.pegacorn.core.model.dates.EffectivePeriod;
-import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.PegacornIdentifierCodeEnum;
-import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.PegacornIdentifierCodeSystemFactory;
+import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.DRICaTSIdentifierCodeEnum;
+import net.fhirfactory.pegacorn.internals.fhir.r4.codesystems.DRICaTSIdentifierCodeSystemFactory;
 import net.fhirfactory.pegacorn.internals.fhir.r4.resources.identifier.DRICaTSIdentifierFactory;
 import net.fhirfactory.pegacorn.referencevalues.PegacornSystemReference;
 import org.hl7.fhir.r4.model.Identifier;
@@ -45,7 +45,7 @@ public class CommunicateRoomIDToFHIRGroupIdentifierTransformer {
     private static final Logger LOG = LoggerFactory.getLogger(CommunicateRoomIDToFHIRGroupIdentifierTransformer.class);
 
     @Inject
-    private PegacornIdentifierCodeSystemFactory pegacornIdentifierCodeSystemFactory;
+    private DRICaTSIdentifierCodeSystemFactory pegacornIdentifierCodeSystemFactory;
 
     @Inject
     private DRICaTSIdentifierFactory pegacornIdentifierFactory;
@@ -84,7 +84,7 @@ public class CommunicateRoomIDToFHIRGroupIdentifierTransformer {
     public Identifier transformRoomIDToGroupIdentifier(String roomID, EffectivePeriod period) {
         LOG.debug(".transformRoomIDToGroupIdentifier(): Entry, roomID->{}, period->{}", roomID, period);
         Period fhirPeriod = period.getPeriod();
-        PegacornIdentifierCodeEnum identifierType = PegacornIdentifierCodeEnum.IDENTIFIER_CODE_COMMUNICATE_ROOM_ID;
+        DRICaTSIdentifierCodeEnum identifierType = DRICaTSIdentifierCodeEnum.IDENTIFIER_CODE_COMMUNICATE_ROOM_ID;
         Identifier groupIdentifier = pegacornIdentifierFactory.newIdentifier(identifierType, roomID, fhirPeriod );
         LOG.debug(".transformRoomIDToGroupIdentifier(): Exit, identifier->{}", groupIdentifier);
         return (groupIdentifier);
